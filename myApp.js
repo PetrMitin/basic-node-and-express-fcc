@@ -52,9 +52,13 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = async (personId, done) => {
   const foodToAdd = "hamburger";
-  Person.findById(personId, (err, data) => {
+  Person.findById(personId, (err, person) => {
     if (err) return done(err);
-    done(err, data);
+    person.favoriteFoods.push(foodToAdd);
+    person.save((err, updatedPerson) => {
+      if (err) return done(err);
+      done(null, updatedPerson)
+    })
   })
 };
 
