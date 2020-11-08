@@ -50,10 +50,12 @@ const findPersonById = (personId, done) => {
   })
 };
 
-const findEditThenSave = (personId, done) => {
+const findEditThenSave = async (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if (err) return done(err);
+    done(err, data);
+  })
 };
 
 const findAndUpdate = (personName, done) => {
